@@ -109,16 +109,18 @@ async function execute(message, serverQueue)
 {
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
+    const arguments = message.slice(config.prefix).trim();
     if(args.length > 1)
     {
         var opts = {
             maxResults: 1,
             key: 'AIzaSyD7ORC0fm6lAnzkDLGNAdXA2BAI10UBcj0'
         };
-        search(args, opts, function(err, results) {
+        search(arguments, opts, function(err, results) {
             if(err) return console.log(err);
 
             console.dir(results);
+            args[0] = results[0].link;
         })
     }
     const channel = message.member.voice.channel;
