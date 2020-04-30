@@ -110,7 +110,7 @@ async function execute(message, serverQueue)
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     const arguments = message.content.slice(config.prefix).trim();
-    if(args.startsWith("http"))
+    if(!arguments.startsWith("http"))
     {
         var opts = {
             maxResults: 1,
