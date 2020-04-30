@@ -120,10 +120,58 @@ async function execute(message, serverQueue)
             if(err) return console.log(err);
 
             console.dir(results);
-            args[0] = results[0].link;
+            var link = results[0].link;
             console.log(args[0]);
+            const channel = message.member.voice.channel;
+                if(!channel)
+                {
+                    const embed = new Discord.MessageEmbed().setTitle("Join a voice channel!");
+                    message.channel.send({embed});
+                } else
+                {
+                    const songInfo = await ytdl.getInfo(link);
+                    const song = {
+                        title: songInfo.title,
+                        url: songInfo.video_url
+                    };
+
+                    if(!serverQueue)
+                    {
+                        const queueContruct = {
+                            textChannel: message.channel,
+                            voiceChannel: channel,
+                            connection: null,
+                            songs: [],
+                            volume: 2,
+                            playing: true
+                        };
+
+                        queue.set(message.guild.id, queueContruct);
+                        queueContruct.songs.push(song);
+                        try
+                        {
+                            var connection = await channel.join();
+                            queueContruct.connection = connection;
+
+                            play(message.guild, queueContruct.songs[0]);
+                        } catch (err)
+                        {
+                            console.log(err);
+                            queue.delete(message.guild.id);
+                            const embed = new Discord.MessageEmbed().setTitle(err);
+                            return message.channel.send({embed});
+                        }
+                    } else
+                    {
+                        serverQueue.songs.push(song);
+                        console.log(serverQueue.songs);
+                        const embed = new Discord.MessageEmbed().setTitle("${song.title} has been added to the queue!").setImage(songInfo.thumbnail_url);
+                        message.channel.send({embed});
+                    }
+                }
         })
-    }
+    } else
+    {
     const channel = message.member.voice.channel;
                 if(!channel)
                 {
@@ -171,6 +219,7 @@ async function execute(message, serverQueue)
                         message.channel.send({embed});
                     }
                 }
+            }
 }
 
 function play(guild, song)
