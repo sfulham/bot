@@ -18,6 +18,8 @@ client.on("message", (message) => {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
+        console.log(message.guild.roles.resolve("Moderator").id);
+
         if(command == "help")
         {
 			if((message.guild.member(message.author).roles.cache.has("705252868076077076") && message.guild.member(message.author).roles.cache.has("705252868076077076")) || (message.guild.member(message.author).roles.cache.has("705267382959996981") && message.guild.member(message.author).roles.cache.has("705267382959996981")))
@@ -172,34 +174,34 @@ async function execute(message, serverQueue)
         })
     } else
     {
-    const channel = message.member.voice.channel;
-                if(!channel)
-                {
-                    const embed = new Discord.MessageEmbed().setTitle("Join a voice channel!");
-                    message.channel.send({embed});
-                } else
-                {
-                    const songInfo = await ytdl.getInfo(args[0]);
-                    const song = {
-                        title: songInfo.title,
-                        url: songInfo.video_url
-                    };
+        const channel = message.member.voice.channel;
+        if(!channel)
+        {
+            const embed = new Discord.MessageEmbed().setTitle("Join a voice channel!");
+            message.channel.send({embed});
+        } else
+        {
+            const songInfo = await ytdl.getInfo(args[0]);
+            const song = {
+                title: songInfo.title,
+                url: songInfo.video_url
+            };
 
-                    if(!serverQueue)
-                    {
-                        const queueContruct = {
-                            textChannel: message.channel,
-                            voiceChannel: channel,
-                            connection: null,
-                            songs: [],
-                            volume: 2,
-                            playing: true
-                        };
+            if(!serverQueue)
+            {
+                const queueContruct = {
+                    textChannel: message.channel,
+                    voiceChannel: channel,
+                    connection: null,
+                    songs: [],
+                    volume: 2,
+                    playing: true
+                };
 
-                        queue.set(message.guild.id, queueContruct);
-                        queueContruct.songs.push(song);
-                        try
-                        {
+                queue.set(message.guild.id, queueContruct);
+                queueContruct.songs.push(song);
+                try
+                {
                             var connection = await channel.join();
                             queueContruct.connection = connection;
 
