@@ -165,8 +165,7 @@ async function execute(message, serverQueue)
                     {
                         serverQueue.songs.push(song);
                         console.log(serverQueue.songs);
-                        const embed = new Discord.MessageEmbed().setTitle(song.title 
-+ " has been added to the queue!").setImage(songInfo.thumbnail_url);
+                        const embed = new Discord.MessageEmbed().setTitle(song.title + " has been added to the queue!").setImage(songInfo.thumbnail_url);
                         message.channel.send({embed});
                     }
                 }
@@ -216,9 +215,7 @@ async function execute(message, serverQueue)
                     {
                         serverQueue.songs.push(song);
                         console.log(serverQueue.songs);
-                        const embed = new 
-Discord.MessageEmbed().setTitle(song.title + " has been added to the 
-queue!").setImage(songInfo.thumbnail_url);
+                        const embed = new Discord.MessageEmbed().setTitle(song.title + " has been added to the queue!").setImage(songInfo.thumbnail_url);
                         message.channel.send({embed});
                     }
                 }
