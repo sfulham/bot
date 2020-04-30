@@ -18,7 +18,7 @@ client.on("message", (message) => {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
-        console.log(message.guild.roles.get("name", "Moderator").id); 
+        console.log(message.guild.roles.find(role => role.name === "Moderator").id); 
 
         if(command == "help")
         {
