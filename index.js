@@ -18,20 +18,22 @@ client.on("message", (message) => {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
-        console.log(message.guild.roles.find(role => role.name === "Moderator").id); 
+        let r = message.guild.roles.cache.find()
+
+        console.log(r.); 
 
         if(command == "help")
         {
-			if((message.guild.member(message.author).roles.cache.has("705252868076077076") && message.guild.member(message.author).roles.cache.has("705252868076077076")) || (message.guild.member(message.author).roles.cache.has("705267382959996981") && message.guild.member(message.author).roles.cache.has("705267382959996981")))
+			if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator")) && message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
 			{
 				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "play", "Play some music!").addField(config.prefix + "stop", "Stop the music").addField(config.prefix + "skip", "Skip the currently playing song").addField(config.prefix + "ban", "Ban the mentioned user").addField(config.prefix + "kick", "Kick the mentioned user");
 				message.channel.send({embed});
 			} else
-			if(message.guild.member(message.author).roles.cache.has("699866053479759876") || message.guild.member(message.author).roles.cache.has("695100139399807040"))
+			if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator")))
 			{
 				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "ban", "Ban the mentioned user").addField(config.prefix + "kick", "Kick the mentioned user");
 				message.channel.send({embed});
-			} else if(message.guild.member(message.author).roles.cache.has("705252868076077076") || message.guild.member(message.author).roles.cache.has("705267382959996981") || message.guild.member(message.author).roles.cache.has("701257567480971264"))
+			} else if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
 			{
 				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "play", "Play some music!").addField(config.prefix + "stop", "Stop the music").addField(config.prefix + "skip", "Skip the currently playing song");
 				message.channel.send({embed});
@@ -46,7 +48,7 @@ client.on("message", (message) => {
             message.channel.send({embed});
         } else if(command == "ban")
         {
-            if(message.guild.member(message.author).roles.cache.has("699866053479759876") || message.guild.member(message.author).roles.cache.has("695100139399807040"))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator")))
             {
                 var member = message.mentions.members.first();
                 member.ban().then((member) => {
@@ -63,7 +65,7 @@ client.on("message", (message) => {
             }
         } else if(command == "kick")
         {
-            if(message.guild.member(message.author).roles.cache.has("699866053479759876") || message.guild.member(message.author).roles.cache.has("695100139399807040"))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator")))
             {
                 var member = message.mentions.members.first();
                 member.kick().then((member) => {
@@ -80,7 +82,7 @@ client.on("message", (message) => {
             }
         } else if(command == "play")
         {
-            if(message.guild.member(message.author).roles.cache.has("705252868076077076") || message.guild.member(message.author).roles.cache.has("705267382959996981") || message.guild.member(message.author).roles.cache.has("701257567480971264"))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
             {
                 const serverQueue = queue.get(message.guild.id);
                 
@@ -88,7 +90,7 @@ client.on("message", (message) => {
             }
         }else if(command == "stop")
         {
-            if(message.guild.member(message.author).roles.cache.has("705252868076077076") || message.guild.member(message.author).roles.cache.has("705267382959996981") || message.guild.member(message.author).roles.cache.has("701257567480971264"))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
             {
                 const serverQueue = queue.get(message.guild.id);
                 
@@ -96,7 +98,7 @@ client.on("message", (message) => {
             }
         } else if(command == "skip")
         {
-            if(message.guild.member(message.author).roles.cache.has("705252868076077076") || message.guild.member(message.author).roles.cache.has("705267382959996981") || message.guild.member(message.author).roles.cache.has("701257567480971264"))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
             {
                 const serverQueue = queue.get(message.guild.id);
                 
