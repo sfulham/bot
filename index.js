@@ -116,7 +116,7 @@ async function execute(message, serverQueue)
             maxResults: 1,
             key: 'AIzaSyD7ORC0fm6lAnzkDLGNAdXA2BAI10UBcj0'
         };
-        search(arguments, opts, function(err, results) {
+        search(arguments, opts, async function(err, results) {
             if(err) return console.log(err);
 
             console.dir(results);
