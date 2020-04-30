@@ -3,6 +3,8 @@ const client = new Discord.Client();
 
 const ytdl = require("ytdl-core");
 
+const search = require("youtube-search");
+
 const config = require("./config.json");
 
 const queue = new Map();
@@ -107,6 +109,18 @@ async function execute(message, serverQueue)
 {
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
+    if(args.length > 1)
+    {
+        var opts = {
+            maxResults: 1,
+            key: 'AIzaSyD7ORC0fm6lAnzkDLGNAdXA2BAI10UBcj0'
+        };
+        search(args, opts, function(err, results) {
+            if(err) return console.log(err);
+
+            console.dir(results);
+        })
+    }
     const channel = message.member.voice.channel;
                 if(!channel)
                 {
