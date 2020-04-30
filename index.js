@@ -110,6 +110,7 @@ client.on("message", (message) => {
                 for(song in serverqueue.songs)
                 {
                     embed = embed.addField(song.title);
+                    console.log(song.title);
                 }
                 message.channel.send({embed});
             }
