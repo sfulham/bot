@@ -9,7 +9,6 @@ const config = require("./config.json");
 
 const queue = new Map();
 
-
 client.on("ready", ()=> {});
 
 client.on("message", (message) => {
@@ -99,6 +98,20 @@ client.on("message", (message) => {
                 const serverQueue = queue.get(message.guild.id);
                 
                 skip(message, serverQueue);
+            }
+        } else if(command == "queue")
+        {
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
+            {
+                const serverQueue = queue.get(message.guild.id);
+                
+                const embed = new Discord.MessageEmbed().setTitle("Queue");
+                const serverqueue = queue[message.guild.id];
+                for(song in serverqueue.songs)
+                {
+                    embed = embed.addField(song.title);
+                }
+                message.channel.send({embed});
             }
         }
     }
