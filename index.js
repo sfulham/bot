@@ -165,7 +165,8 @@ async function execute(message, serverQueue)
                     {
                         serverQueue.songs.push(song);
                         console.log(serverQueue.songs);
-                        const embed = new Discord.MessageEmbed().setTitle("${song.title} has been added to the queue!").setImage(songInfo.thumbnail_url);
+                        const embed = new Discord.MessageEmbed().setTitle(song.title 
++ " has been added to the queue!").setImage(songInfo.thumbnail_url);
                         message.channel.send({embed});
                     }
                 }
@@ -215,7 +216,9 @@ async function execute(message, serverQueue)
                     {
                         serverQueue.songs.push(song);
                         console.log(serverQueue.songs);
-                        const embed = new Discord.MessageEmbed().setTitle("${song.title} has been added to the queue!").setImage(songInfo.thumbnail_url);
+                        const embed = new 
+Discord.MessageEmbed().setTitle(song.title + " has been added to the 
+queue!").setImage(songInfo.thumbnail_url);
                         message.channel.send({embed});
                     }
                 }
@@ -239,7 +242,7 @@ function play(guild, song)
     })
     .on("error", error => console.error(error));
   dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-  const embed = new Discord.MessageEmbed().setTitle("Playing song ${song.title}");
+  const embed = new Discord.MessageEmbed().setTitle("Playing song " + song.title);
   serverQueue.textChannel.send({embed});
 }
 
