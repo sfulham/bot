@@ -93,7 +93,7 @@ client.on("message", (message) => {
             }
         } else if(command == "skip")
         {
-            console.log("Skipping");
+            console.log(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")));
             if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
             {
 
