@@ -108,7 +108,7 @@ client.on("message", (message) => {
             {
                 const serverQueue = queue.get(message.guild.id);
                 
-                const embed = new Discord.MessageEmbed().setTitle("Queue");
+                var embed = new Discord.MessageEmbed().setTitle("Queue");
                 const serverqueue = queue[message.guild.id];
                 for(song in serverQueue.songs)
                 {
