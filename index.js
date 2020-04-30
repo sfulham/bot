@@ -85,7 +85,13 @@ client.on("message", (message) => {
             }
         }else if(command == "stop")
         {
+<<<<<<< HEAD
             if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
+=======
+            console.log(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")));
+
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
+>>>>>>> 7d181ef6036f8876e19779be912127a4e80ecf90
             {
                 const serverQueue = queue.get(message.guild.id);
                 
