@@ -18,8 +18,11 @@ client.on("message", (message) => {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
+<<<<<<< HEAD
         let r = message.guild.roles.cache.find()
 
+=======
+>>>>>>> c71a50937c656e20a41915cfc2dca70ec125f2af
         if(command == "help")
         {
 			if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator")) && message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
