@@ -93,9 +93,10 @@ client.on("message", (message) => {
             }
         } else if(command == "skip")
         {
+            console.log("Skipping");
             if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
             {
-                console.log("Skipping");
+
                 const serverQueue = queue.get(message.guild.id);
                 
                 skip(message, serverQueue);
