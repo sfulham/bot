@@ -121,6 +121,7 @@ async function execute(message, serverQueue)
 
             console.dir(results);
             args[0] = results[0].link;
+            console.log(args[0]);
         })
     }
     const channel = message.member.voice.channel;
