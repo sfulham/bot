@@ -85,9 +85,8 @@ client.on("message", (message) => {
             }
         }else if(command == "stop")
         {
-            console.log(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")));
 
-            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
 
             {
                 const serverQueue = queue.get(message.guild.id);
@@ -96,8 +95,7 @@ client.on("message", (message) => {
             }
         } else if(command == "skip")
         {
-            console.log(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")));
-            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
             {
 
                 const serverQueue = queue.get(message.guild.id);
@@ -106,9 +104,8 @@ client.on("message", (message) => {
             }
         } else if(command == "queue")
         {
-            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ")))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
             {
-                console.log("You have permission");
                 const serverQueue = queue.get(message.guild.id);
                 
                 const embed = new Discord.MessageEmbed().setTitle("Queue");
