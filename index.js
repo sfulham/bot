@@ -110,7 +110,7 @@ async function execute(message, serverQueue)
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     const arguments = message.content.slice(config.prefix).trim();
-    if(args.length > 1)
+    if(args.startsWith("http"))
     {
         var opts = {
             maxResults: 1,
@@ -165,7 +165,7 @@ async function execute(message, serverQueue)
                     {
                         serverQueue.songs.push(song);
                         console.log(serverQueue.songs);
-                        const embed = new Discord.MessageEmbed().setTitle(song.title + " has been added to the queue!").setImage(songInfo.thumbnail_url);
+                        const embed = new Discord.MessageEmbed().setTitle(song.title + " has been added to the queue!").setURL(link);
                         message.channel.send({embed});
                     }
                 }
@@ -215,7 +215,7 @@ async function execute(message, serverQueue)
                     {
                         serverQueue.songs.push(song);
                         console.log(serverQueue.songs);
-                        const embed = new Discord.MessageEmbed().setTitle(song.title + " has been added to the queue!").setImage(songInfo.thumbnail_url);
+                        const embed = new Discord.MessageEmbed().setTitle(song.title + " has been added to the queue!").setURL(args[0]);
                         message.channel.send({embed});
                     }
                 }
