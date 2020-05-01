@@ -16,7 +16,18 @@ client.on("message", (message) => {
     {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
-
+        if(message.guild.name == "The Server" && command == "help")
+        {
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
+			{
+				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "play", "Play some music!").addField(config.prefix + "stop", "Stop the music").addField(config.prefix + "skip", "Skip the currently playing song");
+				message.channel.send({embed});
+			} else 
+			{
+				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF);
+				message.channel.send({embed});
+			}
+        } else
         if(command == "help")
         {
 			if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator").id) && message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
