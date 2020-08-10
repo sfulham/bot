@@ -9,6 +9,8 @@ const config = require("./config.json");
 
 const queue = new Map();
 
+var warns = new Map();
+
 client.on("ready", ()=> {});
 
 client.on("message", (message) => {
@@ -16,45 +18,33 @@ client.on("message", (message) => {
     {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
-        if(message.guild.name == "The Server" && command == "help")
-        {
-            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
-			{
-				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "play", "Play some music!").addField(config.prefix + "stop", "Stop the music").addField(config.prefix + "skip", "Skip the currently playing song");
-				message.channel.send({embed});
-			} else 
-			{
-				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF);
-				message.channel.send({embed});
-			}
-        } else
         if(command == "help")
         {
-			if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator").id) && message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
+			if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Mod").id) && message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
 			{
-				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "play", "Play some music!").addField(config.prefix + "stop", "Stop the music").addField(config.prefix + "skip", "Skip the currently playing song").addField(config.prefix + "ban", "Ban the mentioned user").addField(config.prefix + "kick", "Kick the mentioned user");
-				message.channel.send({embed});
+				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(message.author.username, message.author.avatarURL()).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "play", "Play some music!").addField(config.prefix + "stop", "Stop the music").addField(config.prefix + "skip", "Skip the currently playing song").addField(config.prefix + "ban", "Ban the mentioned user").addField(config.prefix + "kick", "Kick the mentioned user");
+				message.author.createDM().then(dmchannel => {dmchannel.send({embed})});
 			} else
-			if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator").id))
+			if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Mod").id))
 			{
-				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "ban", "Ban the mentioned user").addField(config.prefix + "kick", "Kick the mentioned user");
-				message.channel.send({embed});
+				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(message.author.username, message.author.avatarURL()).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "ban", "Ban the mentioned user").addField(config.prefix + "kick", "Kick the mentioned user");
+                message.author.createDM().then(dmchannel => {dmchannel.send({embed})});
 			} else if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "DJ").id))
 			{
-				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "play", "Play some music!").addField(config.prefix + "stop", "Stop the music").addField(config.prefix + "skip", "Skip the currently playing song");
-				message.channel.send({embed});
+				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(message.author.username, message.author.avatarURL()).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF).addField(config.prefix + "play", "Play some music!").addField(config.prefix + "stop", "Stop the music").addField(config.prefix + "skip", "Skip the currently playing song");
+                message.author.createDM().then(dmchannel => {dmchannel.send({embed})});
 			} else 
 			{
-				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(client.user.username, client.user.avatarURL).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF);
-				message.channel.send({embed});
+				const embed = new Discord.MessageEmbed().setTitle("Help").setAuthor(message.author.username, message.author.avatarURL()).addField(config.prefix + "help", "Shows this menu").addField(config.prefix + "Ping", "Pong!").setColor(0x00FFFF);
+                message.author.createDM().then(dmchannel => {dmchannel.send({embed})});
 			}
         } else if(command == "ping")
         {
-            const embed = new Discord.MessageEmbed().setTitle("Pong!").setAuthor(client.user.username, client.user.avatarURL).setColor(0x00FFFF);
+            const embed = new Discord.MessageEmbed().setTitle("Pong!").setAuthor(message.author.username, message.author.avatarURL()).setColor(0x00FFFF);
             message.channel.send({embed});
         } else if(command == "ban")
         {
-            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator")))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Mod")))
             {
                 var member = message.mentions.members.first();
                 member.ban().then((member) => {
@@ -71,7 +61,7 @@ client.on("message", (message) => {
             }
         } else if(command == "kick")
         {
-            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Moderator").id))
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Mod").id))
             {
                 var member = message.mentions.members.first();
                 member.kick().then((member) => {
@@ -128,6 +118,48 @@ client.on("message", (message) => {
                 }
                 message.channel.send({embed});
             }
+        } else if(command == "warn")
+        {
+            if(message.guild.member(message.author).roles.cache.has(message.guild.roles.cache.find(r => r.name === "Mod").id))
+            {
+                const arguments = message.content.slice(config.prefix).trim().split(" ");
+                let warn;
+                if(warns.has(message.mentions.users.first()))
+                {
+                    warn = {
+                        "user": message.mentions.users.first(),
+                        "warn_count": warns.get(message.mentions.users.first()).warn_count + 1,
+                        "warns": [warns.get(message.mentions.users.first()).warns, {"reason": arguments[2]}]
+                    }
+                } else
+                {
+                    warn = {
+                        "user": message.mentions.users.first(),
+                        "warn_count": 1,
+                        "warns": [
+                            {"reason": arguments[2]}
+                        ]
+                    }
+                }
+
+                warns.set(message.mentions.users.first(), warn);
+                const embed = new Discord.MessageEmbed().setAuthor(message.mentions.users.first(), message.mentions.users.first().avatarURL()).addField("Reason", warns.get(message.mentions.users.first()).warns[warns.get(message.mentions.users.first()).warn_count - 1].reason);
+                message.channel.send({embed});
+            }
+        } else if(command == "warns")
+        {
+            const embed = new Discord.MessageEmbed().setAuthor(message.mentions.users.first());
+            var text;
+            if(warns.get(message.mentions.users.first()))
+            {
+                for(let i = 0; i < warns.get(message.mentions.users.first()).warn_count; i++)
+                {
+                    text += warns.get(message.mentions.users.first()).warns[i].reason + "\n";
+                }
+                embed.addField("Warns", text);
+            }
+
+            message.channel.send({embed});
         }
     }
     
