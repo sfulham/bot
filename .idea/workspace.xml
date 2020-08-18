@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a7a61bd-b8e7-4069-8e9b-2384dbdf549e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +20,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/index.js" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="discord-project" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -41,7 +44,7 @@
       <updated>1597030082532</updated>
       <workItem from="1597030084184" duration="1360000" />
       <workItem from="1597031455844" duration="22000" />
-      <workItem from="1597031486650" duration="3259000" />
+      <workItem from="1597031486650" duration="5788000" />
     </task>
     <servers />
   </component>
@@ -53,26 +56,26 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="304" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597030117723" />
-    <state x="627" y="315" key="FileChooserDialogImpl" timestamp="1597030112668">
+    <state x="627" y="315" key="FileChooserDialogImpl" timestamp="1597038018163">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="627" y="315" key="FileChooserDialogImpl/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597030112668" />
-    <state width="1635" height="176" key="GridCell.Tab.0.bottom" timestamp="1597034720261">
+    <state x="627" y="315" key="FileChooserDialogImpl/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597038018163" />
+    <state width="1635" height="176" key="GridCell.Tab.0.bottom" timestamp="1597038020367">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1635" height="176" key="GridCell.Tab.0.bottom/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597034720261" />
-    <state width="1635" height="176" key="GridCell.Tab.0.center" timestamp="1597034720261">
+    <state width="1635" height="176" key="GridCell.Tab.0.bottom/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597038020367" />
+    <state width="1635" height="176" key="GridCell.Tab.0.center" timestamp="1597038020367">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1635" height="176" key="GridCell.Tab.0.center/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597034720261" />
-    <state width="1635" height="176" key="GridCell.Tab.0.left" timestamp="1597034720261">
+    <state width="1635" height="176" key="GridCell.Tab.0.center/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597038020367" />
+    <state width="1635" height="176" key="GridCell.Tab.0.left" timestamp="1597038020366">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1635" height="176" key="GridCell.Tab.0.left/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597034720261" />
-    <state width="1635" height="176" key="GridCell.Tab.0.right" timestamp="1597034720261">
+    <state width="1635" height="176" key="GridCell.Tab.0.left/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597038020366" />
+    <state width="1635" height="176" key="GridCell.Tab.0.right" timestamp="1597038020367">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1635" height="176" key="GridCell.Tab.0.right/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597034720261" />
+    <state width="1635" height="176" key="GridCell.Tab.0.right/1680.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1597038020367" />
     <state x="349" y="192" key="SettingsEditor" timestamp="1597031567098">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

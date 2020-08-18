@@ -10,10 +10,22 @@ const config = require("./config.json");
 const queue = new Map();
 
 var warns = new Map();
+var bans = new Map();
 
-client.on("ready", ()=> {});
+
+var activity = {name: "stop it. get some help", type: "WATCHING"};
+
+client.on("ready", ()=> 
+{
+    client.user.setActivity(activity);
+    client.user.setStatus("dnd");
+    var channel = new Discord.TextChannel(new Discord.Guild(client, {id: "737188825755025470"}), {id: "737204533360459897"});
+    channel.startTyping();
+    run();
+});
 
 client.on("message", (message) => {
+    run();
     if(message.content.startsWith(config.prefix))
     {
         const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -127,34 +139,45 @@ client.on("message", (message) => {
                 if(warns.has(message.mentions.users.first()))
                 {
                     warn = {
-                        "user": message.mentions.users.first(),
-                        "warn_count": warns.get(message.mentions.users.first()).warn_count + 1,
-                        "warns": [warns.get(message.mentions.users.first()).warns, {"reason": arguments[2]}]
+                        user: message.mentions.users.first(),
+                        warn_count: warns.get(message.mentions.users.first()).warn_count + 1,
+                        warns: [{reason: arguments[2]}]
+                    }
+                    for(var i = 0; i<warns.get(message.mentions.users.first()).warn_count; i++)
+                    {
+                        warn.warns[i+1] = warns.get(message.mentions.users.first()).warns[i];
                     }
                 } else
                 {
                     warn = {
-                        "user": message.mentions.users.first(),
-                        "warn_count": 1,
-                        "warns": [
-                            {"reason": arguments[2]}
+                        user: message.mentions.users.first(),
+                        warn_count: 1,
+                        warns: [
+                            {reason: arguments[2]}
                         ]
                     }
                 }
 
+                if(warn.warn_count >= 3)
+                {
+                    bans.set(message.mentions.members.first(), {name: message.mentions.users.first().username, startTime: new Date().getDate(), endTime: new Date().getDate() + 30})
+                    message.mentions.members.first().ban().catch((reason) => {const embed = new Discord.MessageEmbed().setAuthor(message.mentions.users.first(), message.mentions.users.first().avatarURL()).setTitle("Failed to ban " + message.mentions.users.first().username).addField("Reason", reason); message.channel.send({embed});});
+                    warns.set(message.mentions.users.first(), null);
+                }
+
                 warns.set(message.mentions.users.first(), warn);
-                const embed = new Discord.MessageEmbed().setAuthor(message.mentions.users.first(), message.mentions.users.first().avatarURL()).addField("Reason", warns.get(message.mentions.users.first()).warns[warns.get(message.mentions.users.first()).warn_count - 1].reason);
+                const embed = new Discord.MessageEmbed().setAuthor(message.mentions.users.first(), message.mentions.users.first().avatarURL()).addField("Reason", warn.warns[0].reason);
                 message.channel.send({embed});
             }
         } else if(command == "warns")
         {
             const embed = new Discord.MessageEmbed().setAuthor(message.mentions.users.first());
-            var text;
+            var text = "";
             if(warns.get(message.mentions.users.first()))
             {
-                for(let i = 0; i < warns.get(message.mentions.users.first()).warn_count; i++)
+                for(var warn in warns.get(message.mentions.users.first()).warns)
                 {
-                    text += warns.get(message.mentions.users.first()).warns[i].reason + "\n";
+                    text += warns.get(message.mentions.users.first()).warns[warn].reason + "\n";
                 }
                 embed.addField("Warns", text);
             }
@@ -323,3 +346,16 @@ function skip(message, serverQueue) {
 }
 
 client.login(config.token);
+
+async function run()
+{
+
+    bans.forEach((value, key, map) => {
+        if(value.endTime == new Date().getDate())
+        {
+            var user = new Discord.User(client, {username: value});
+            key.guild.unban(key.id, "Times Up");
+        }
+    })
+
+}
